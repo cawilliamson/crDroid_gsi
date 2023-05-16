@@ -1,38 +1,27 @@
-From 5822adeb20c44d5e7765ff52420610f2e1f1bda3 Mon Sep 17 00:00:00 2001
-From: naz664 <nazimnavas145@gmail.com>
-Date: Sat, 12 Nov 2022 05:56:46 +0000
-Subject: [PATCH 31/34] Revert duplicated inCryptKeeperBounce()
+From efddbe0dc2d0a959125aba937a8d85705bb70fb0 Mon Sep 17 00:00:00 2001
+From: Alberto Ponces <ponces26@gmail.com>
+Date: Sun, 20 Nov 2022 20:04:13 +0000
+Subject: [PATCH 4/5] Revert "StorageManager: Add dummy inCryptKeeperBounce method"
 
+This reverts commit 787e5e4ef82abc025993c0aded1741e2f25bf49d.
 ---
- core/java/android/os/storage/StorageManager.java | 15 ---------------
- 1 file changed, 15 deletions(-)
+ core/java/android/os/storage/StorageManager.java | 4 ----
+ 1 file changed, 4 deletions(-)
 
 diff --git a/core/java/android/os/storage/StorageManager.java b/core/java/android/os/storage/StorageManager.java
-index c610a6862864..b3581213c30d 100644
+index 8241a59202f0..7a0e0d310f05 100644
 --- a/core/java/android/os/storage/StorageManager.java
 +++ b/core/java/android/os/storage/StorageManager.java
-@@ -1748,21 +1748,6 @@ public class StorageManager {
-         return false;
+@@ -1699,10 +1699,6 @@ public class StorageManager {
+         return RoSystemProperties.CRYPTO_ENCRYPTED;
      }
  
--    /** {@hide}
--     * Is this device non default block encrypted and in the process of
--     * prompting for credentials?
--     * @return true for prompting for credentials.
--     *         (Implies isNonDefaultBlockEncrypted() == true)
--     *         false otherwise
--     * Note that only system services and CryptKeeper will ever see this return
--     * true - no app will ever be launched in this state.
--     * Also note that this state will not change without a teardown of the
--     * framework, so no service needs to check for changes during their lifespan
--     */
 -    public static boolean inCryptKeeperBounce() {
 -        return false;
 -    }
 -
-     /** {@hide} */
-     public static boolean isFileEncryptedEmulatedOnly() {
-         return SystemProperties.getBoolean(StorageManager.PROP_EMULATE_FBE, false);
+     /** {@hide}
+      * Is this device file encrypted?
+      * @return true for file encrypted. (Implies isEncrypted() == true)
 -- 
-2.25.1
-
+2.34.1
